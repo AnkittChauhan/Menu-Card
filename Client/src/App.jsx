@@ -16,16 +16,16 @@ function App() {
   const addDish = () => {
    if(name == "" && price == "" && url == "" ){
 
-    return alert("Enter a values first")
+    return alert("Enter the values first")
 
    } else{
-    axios.post("https://menu-card-project.onrender.com/createItem", {
+    axios.post("http://localhost:5500/createItem", {
       name,
       price,
       url,
-  }).catch(error => { throw error}).then(() => {
+  }).catch((error) => { throw error}).then(() => {
     alert("Dish Added !!");
-    axios.get("https://menu-card-project.onrender.com/getItems").then((response) => {
+    axios.get("http://localhost:5500/getItems").then((response) => {
     setlistOfItems(response.data);
   });
   });
@@ -34,19 +34,27 @@ function App() {
   };
 
       useEffect(() => {
-          axios.get("https://menu-card-project.onrender.com/getItems").then((response) => {
-            setlistOfItems(response.data)
-          }).catch(error => { throw error})
+         
+        axios.get("http://localhost:5500/getItems").then((response) => {
+        
+         
+        setlistOfItems(response.data)
+      
+    })
       } , [])
 
       const deleteItem = (id) => {
         
-        axios.delete(`https://menu-card-project.onrender.com/deleteItems/${id}`).then(alert("Dish Removed"))
+        axios.delete(`http://localhost:5500/deleteItems/${id}`).then(alert("Dish Removed"))
 
         
-        axios.get("https://menu-card-project.onrender.com/getItems").then((response) => {
-            setlistOfItems(response.data).catch(error => { throw error})
+        axios.get("http://localhost:5500/getItems").then((response) => {
+        
+         
+            setlistOfItems(response.data)
+          
         })
+        
       
     };
       
