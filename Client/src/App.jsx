@@ -23,7 +23,7 @@ function App() {
       name,
       price,
       url,
-  }).then(() => {
+  }).catch(error => { throw error}).then(() => {
     alert("Dish Added !!");
     axios.get("https://menu-card-project.onrender.com/getItems").then((response) => {
     setlistOfItems(response.data);
@@ -36,7 +36,7 @@ function App() {
       useEffect(() => {
           axios.get("https://menu-card-project.onrender.com/getItems").then((response) => {
             setlistOfItems(response.data)
-          })
+          }).catch(error => { throw error})
       } , [])
 
       const deleteItem = (id) => {
@@ -45,7 +45,7 @@ function App() {
 
         
         axios.get("https://menu-card-project.onrender.com/getItems").then((response) => {
-            setlistOfItems(response.data)
+            setlistOfItems(response.data).catch(error => { throw error})
         })
       
     };
