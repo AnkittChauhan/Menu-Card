@@ -21,7 +21,7 @@ mongoose.connect("mongodb+srv://NeonWolf:R2J6HwBq0s0Zhios@cluster0.qfk8blf.mongo
             const results = await itemModel.find();
             res.json(results);
         } catch (err) {
-            res.status(500).json(err);
+            res.json(err);
         }
     });
     
@@ -33,7 +33,7 @@ mongoose.connect("mongodb+srv://NeonWolf:R2J6HwBq0s0Zhios@cluster0.qfk8blf.mongo
             await newItems.save();
             res.json(items);
         } catch (err) {
-            res.status(500).json(err);
+            res.json(err);
         }
     });
     
@@ -44,7 +44,7 @@ mongoose.connect("mongodb+srv://NeonWolf:R2J6HwBq0s0Zhios@cluster0.qfk8blf.mongo
             await itemModel.findByIdAndDelete(id).exec();
             res.json({ message: "ItemRemoved" });
         } catch (err) {
-            res.status(500).json(err);
+            res.json(err);
         }
     });
     
