@@ -19,13 +19,13 @@ function App() {
     return alert("Enter the values first")
 
    } else{
-    axios.post("http://localhost:5500/createItem", {
+    axios.post("https://menu-card-c261.onrender.com/createItem", {
       name,
       price,
       url,
   }).catch((error) => { throw error}).then(() => {
     alert("Dish Added !!");
-    axios.get("http://localhost:5500/getItems").then((response) => {
+    axios.get("https://menu-card-c261.onrender.com/getItems").then((response) => {
     setlistOfItems(response.data);
   });
   });
@@ -35,7 +35,7 @@ function App() {
 
       useEffect(() => {
          
-        axios.get("http://localhost:5500/getItems").then((response) => {
+        axios.get("https://menu-card-c261.onrender.com/getItems").then((response) => {
         
          
         setlistOfItems(response.data)
@@ -45,10 +45,10 @@ function App() {
 
       const deleteItem = (id) => {
         
-        axios.delete(`http://localhost:5500/deleteItems/${id}`).then(alert("Dish Removed"))
+        axios.delete(`https://menu-card-c261.onrender.com/deleteItems/${id}`).then(alert("Dish Removed"))
 
         
-        axios.get("http://localhost:5500/getItems").then((response) => {
+        axios.get("https://menu-card-c261.onrender.com/getItems").then((response) => {
         
          
             setlistOfItems(response.data)
