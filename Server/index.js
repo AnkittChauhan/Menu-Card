@@ -7,7 +7,7 @@ app.use(express.json())
 app.use(cors())
 
 
-mongoose.connect("mongodb://127.0.0.1:27017")
+mongoose.connect("mongodb+srv://NeonWolf:R2J6HwBq0s0Zhios@cluster0.qfk8blf.mongodb.net/")
 
 app.get("/getItems" , async ( req , res ) => {
     itemModel.find().then((err,results) => {
