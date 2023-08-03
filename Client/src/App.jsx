@@ -19,13 +19,13 @@ function App() {
     return alert("Enter a values first")
 
    } else{
-    axios.post("http://localhost:5500/createItem", {
+    axios.post("https://menu-card-project.onrender.com/createItem", {
       name,
       price,
       url,
   }).then(() => {
     alert("Dish Added !!");
-    axios.get("http://localhost:5500/getItems").then((response) => {
+    axios.get("https://menu-card-project.onrender.com/getItems").then((response) => {
     setlistOfItems(response.data);
   });
   });
@@ -34,17 +34,17 @@ function App() {
   };
 
       useEffect(() => {
-          axios.get("http://localhost:5500/getItems").then((response) => {
+          axios.get("https://menu-card-project.onrender.com/getItems").then((response) => {
             setlistOfItems(response.data)
           })
       } , [])
 
       const deleteItem = (id) => {
         
-        axios.delete(`http://localhost:5500/deleteItems/${id}`).then(alert("Dish Removed"))
+        axios.delete(`https://menu-card-project.onrender.com/deleteItems/${id}`).then(alert("Dish Removed"))
 
         
-        axios.get("http://localhost:5500/getItems").then((response) => {
+        axios.get("https://menu-card-project.onrender.com/getItems").then((response) => {
             setlistOfItems(response.data)
         })
       
