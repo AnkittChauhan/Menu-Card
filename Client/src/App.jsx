@@ -13,7 +13,7 @@ function App() {
   const [ listOfItems , setlistOfItems ] = useState([]);
 
 
-  const addDish = () => {
+const addDish = () => {
    if(name == "" && price == "" && url == "" ){
 
     return alert("Enter the values first")
@@ -33,6 +33,7 @@ function App() {
     
   };
 
+
       useEffect(() => {
          
         axios.get("https://menu-card-c261.onrender.com/getItems").then((response) => {
@@ -45,17 +46,14 @@ function App() {
 
       const deleteItem = (id) => {
         
-        axios.delete(`https://menu-card-c261.onrender.com/deleteItems/${id}`).then(alert("Dish Removed"))
-
-        
-        axios.get("https://menu-card-c261.onrender.com/getItems").then((response) => {
+        axios.delete(`https://menu-card-c261.onrender.com/deleteItems/${id}`).then(() =>{
+          return axios.get("https://menu-card-c261.onrender.com/getItems")
+        }).then((response) => {
         
          
             setlistOfItems(response.data)
           
-        })
-        
-      
+        }).then(alert("Dish Removed"))  
     };
       
   return (
@@ -79,7 +77,7 @@ function App() {
         }} placeholder='imageUrl'/>
      
       </div>
-      <button onClick={addDish} className='bg-green-400 mt-2 -ml-2 h-8 rounded-lg w-80 lg:w-96 lg:h-10 shadow-2xl font-medium text-white'>Add Item</button>
+      <button onClick={addDish} className='bg-green-400 mt-2 -ml-2 h-8 rounded-lg w-80 lg:w-96 lg:h-10 shadow-2xl font-medium text-white hover:bg-green-500 focus:transition-colors duration-300 active:bg-green-600'>Add Item</button>
       
     </div>
     
@@ -88,10 +86,10 @@ function App() {
       {listOfItems.map((value) => (
             <li key={value.name}>
               <div className='bg-gray-300 h-80 w-56 rounded-3xl shadow-xl'>
-                <div className='max-h-80  max-w-56'><img className='rounded-t-3xl object-fill' src={value.url} alt={value.name} /></div>
+                <div className='h-56'><img className='h-full w-full rounded-t-3xl object-fill' src={value.url} alt={value.name} /></div>
                 <h1 className='text-2xl font-semibold tracking-wider'>Name : {value.name}</h1>
                 <h1 className='font-normal tracking-wider'>Price : ₹{value.price}</h1>
-                <button onClick={ () =>{deleteItem(value._id)} } className='bg-red-500 text-white h-8 w-2/3 rounded-md font-medium tracking-wider'>
+                <button onClick={ () =>{deleteItem(value._id)} } className='bg-red-500 text-white h-8 w-2/3 rounded-md font-medium tracking-wider hover:bg-red-700 focus:transition-colors duration-200 active:scale-95'>
                   Delete Item
                 </button>
               </div>
